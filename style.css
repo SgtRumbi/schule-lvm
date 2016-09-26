@@ -8,13 +8,14 @@ body {
   height: 500px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3cm;
+  margin-top: 2cm;
   background-color: #37474F;
   border-radius: 10px;
 }
 
 #heading {
   text-align: center;
+  color: #E34B30;
 }
 .input{
   border-radius: 10px;
@@ -23,57 +24,78 @@ body {
   margin-left: 0.2cm;
   position: absolute;
   padding: 5px;
+  background-color: #81c08b;
 }
+
+::-webkit-input-placeholder {
+  color: black;
+  opacity: 1 !important; /* for chrome */
+}
+
 .input:focus {
   outline: 0;
 }
 
 #max-ballons {
-  margin-top: 2cm;
+  margin-top: 0.5cm;
 }
 
 #max-fields {
-  margin-top: 4cm;
+  margin-top: 2cm;
 }
 
 .sub-button {
   position: absolute;
-  margin-top: 8cm;
+  margin-top: 3.5cm;
   margin-left: 0.2cm;
   padding: 5px;
   border-radius: 10px;
   border-style: none;
   background-color: white;
-}
-
-.sub-button:focus {
   outline: 0;
-  background-color: red;
+  font-size: 15px;
 }
 
-.field {
-  width: auto;
-  height: auto;
-  margin-top: 5cm;
-  margin-left: 0.5cm;
+.sub-button:hover {
+  outline: 0;
+  background-color: #81c08b;
 }
 
-.splitted-field {
-  width: auto;
-  height: auto;
-  padding: 10px;
-  border-radius: 20px;
-  background-color: red;
-  float: left;
-  margin-right: 10px;
-}
 .fill-button {
   position: absolute;
-  margin-top: 8cm;
+  margin-top: 3.5cm;
   margin-left: 2cm;
   padding: 5px;
   border-radius: 10px;
   border-style: none;
   background-color: white;
+  outline: 0;
+  font-size: 15px;
 }
+
+.fill-button:hover{
+  background-color: #81c08b;
+  outline: 0;
+}
+
+.arrays {
+  position: absolute;
+  margin-top: 5cm;
+  margin-left: 0.2cm;
+  width: auto;
+  height: 100px;
+  padding: 0px;
+}
+
+.field-element {
+  float: left;
+  padding: 5px;
+  background-color: #E34B30;
+  margin-right: 5px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+
+
 
