@@ -68,9 +68,13 @@ function echoArray(array) {
 
 $(document).ready(function () {
     var array = [];
+    var inputFieldMaxBallons = $("#max-ballons");
+    var inputFieldMaxFields = $("#max-fields");
 
     $(".fill-button").on("click", function () {
         // Fill
+
+        createRandomArray()
     });
 
     $(".sub-button").on("click", function () {
