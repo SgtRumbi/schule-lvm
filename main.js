@@ -1,9 +1,62 @@
-(function () {
+$(document).ready(function () {
+    console.log("Document Ready.");
+
+    var array = [];
+    var inputFieldMaxBallons = $("#max-ballons");
+    var inputFieldMaxFields = $("#max-fields");
+    var inputFieldMaxBallonsInPckg = $("#max-ballons-in-pckg");
+    var wholeArrayContainer = $(".whole-array");
+    var preOutputArray = $(".pre-output-array");
+    var outputArray = $(".output-array");
+
+    $(".fill-button").on("click", function () {
+        console.log("Fill Button clicked.");
+
+        var maxBallons = inputFieldMaxBallons.val();
+        var maxFields = inputFieldMaxFields.val();
+        if (!maxBallons) {
+            alert("!maxBallons");
+            return;
+        }
+        if (!maxFields) {
+            alert("!maxFields");
+            return;
+        }
+        
+        array = createRandomArray(maxBallons, maxFields);
+        echoArray(array);
+
+        wholeArrayContainer.empty();
+        // Fill .whole-array with numbers
+        for (var i = 0; i < array.length; i++) {
+            var newFieldElement = $('<div class="field-element" id="JSID-' + i + '">' + array[i] + '</div>')
+            wholeArrayContainer.append(newFieldElement);
+        }
+    });
+
+    $(".sub-button").on("click", function () {
+        var maxBallonsInPckg = inputFieldMaxBallonsInPckg.val();
+        if (!maxBallonsInPckg) {
+            alert("!maxBallonsInPckg");
+            return;
+        }
+
+        // Submit and Calculate
+        if (array.length < 1) {
+            alert("Zu kleines Array!");
+        } else {
+            var lvmResult = lvmSort(array, maxBallonsInPckg);
+            
+        }
+    });
+});
+
+/* (function () {
     var array = createRandomArray(10, 10);
     echoArray(array);
     var lvmResult = lvmSort(array, 20, false);
     console.log(lvmResult.finishMessage);
-})();
+})(); */
 
 function randomInt(max) {
     return Math.floor(Math.random() * max);
@@ -18,7 +71,7 @@ function createRandomArray(size, maxSizeOfValues) {
 }
 
 function echoArray(array) {
-    var logString = "Fächer: [" + array.toString() + "].";
+    var logString = "array:[" + array.toString() + "]";
     console.log(logString);
 }
 
@@ -210,39 +263,3 @@ recurseSum([2, 2, 2, 3, 1, 2, 3, 4, 1], 0, 0, 3); */
     lvm.run();
     // lvm.start();
 })(); */
-
-/* $(document).ready(function () {
-    console.log("Document Ready.");
-
-    var array = [];
-    var inputFieldMaxBallons = $("#max-ballons");
-    var inputFieldMaxFields = $("#max-fields");
-
-    $(".fill-button").on("click", function () {
-        // Fill
-        console.log("Fill Button clicked.");
-
-        var maxBallons = inputFieldMaxBallons.val();
-        var maxFields = inputFieldMaxFields.val();
-        if (!maxBallons) {
-            alert("!maxBallons");
-            return;
-        }
-        if (!maxFields) {
-            alert("!maxFields");
-            return;
-        }
-        array = createRandomArray(maxBallons, maxFields);
-        echoArray(array);
-    });
-
-    $(".sub-button").on("click", function () {
-        // Submit and Calculate
-        if (array.length < 1) {
-            alert("Zu kleines Array!");
-        } else {
-
-        }
-    });
-});
-*/
