@@ -46,7 +46,6 @@ $(document).ready(function () {
             alert("Zu kleines Array!");
         } else {
             var lvmResult = lvmSort(array, maxBallonsInPckg);
-            
         }
     });
 });
