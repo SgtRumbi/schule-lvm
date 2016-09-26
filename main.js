@@ -67,12 +67,15 @@ function echoArray(array) {
 }
 
 $(document).ready(function () {
+    console.log("Document Ready.");
+
     var array = [];
     var inputFieldMaxBallons = $("#max-ballons");
     var inputFieldMaxFields = $("#max-fields");
 
     $(".fill-button").on("click", function () {
         // Fill
+        console.log("Fill Button clicked.");
 
         var maxBallons = inputFieldMaxBallons.val();
         var maxFields = inputFieldMaxFields.val();
