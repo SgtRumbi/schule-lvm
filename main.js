@@ -1,4 +1,89 @@
-function LVM(fields, packageSize) {
+(function () {
+    var array = createRandomArray(10, 10);
+    echoArray(array);
+    var lvmResult = lvmSort(array, 20, false);
+    console.log(lvmResult.finishMessage);
+})();
+
+function randomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+
+function createRandomArray(size, maxSizeOfValues) {
+    var array = [];
+    for (var i = 0; i < size; i++) {
+        array[i] = randomInt(maxSizeOfValues);
+    }
+    return array;
+}
+
+function echoArray(array) {
+    var logString = "Fächer: [" + array.toString() + "].";
+    console.log(logString);
+}
+
+function lvmSort(array, packageSize, debugMessages) {
+    var foundMatch = false;
+    var tolerance = 0;
+    var greatestMatch = 0;
+    var finalSum = 0;
+    var lastMatch = [];
+    do {
+        for (var i = 0; i < Math.pow(2, array.length); i++) {
+            var sum = 0;
+            lastMatch = [];
+            for (var element = 0; element < array.length; element++) {
+                var iAndElementPow = i & Math.pow(2, element);
+                if (iAndElementPow != 0) {
+                    lastMatch.push(element);
+
+                    sum += array[element];
+                    if (debugMessages)
+                        console.log("T. i:" + i + ", element:" + element + ", element^2:" + (Math.pow(2, element)) + ", i&element^2:" + iAndElementPow + ", i&element^2!=0:" + (iAndElementPow != 0));
+                } else {
+                    if (debugMessages)
+                        console.log("F. i:" + i + ", element:" + element + ", element^2:" + (Math.pow(2, element)) + ", i&element^2:" + iAndElementPow + ", i&element^2!=0:" + (iAndElementPow != 0));
+                }
+            }
+
+            if (sum > greatestMatch) {
+                greatestMatch = sum;
+            }
+
+            if (sum == packageSize + tolerance) {
+                finalSum = sum;
+                foundMatch = true;
+                break;
+            } else {
+                if (debugMessages)
+                    console.log("sum:" + sum)
+            }
+        }
+
+        if (greatestMatch < packageSize) {
+            if (debugMessages)
+                console.log("Nothing to find greater than " + greatestMatch + ", aborting.");
+            finalSum = sum;
+            foundMatch = true;
+        }
+
+        tolerance++;
+    } while (!foundMatch);
+    var str = "sum:" + finalSum + ",match:" + (function () {
+            var str = "[";
+            for (var i = 0; i < lastMatch.length; i++) {
+                str += "{index:" + i + ", value:" + array[lastMatch[i]] + "}";
+            }
+            return str + "]";
+        })();
+    if (debugMessages)
+        console.log(str);
+    return {finalSum: finalSum, tolerance: tolerance, matchIndices: lastMatch, finishMessage: str};
+}
+
+// DEPRECATED BELOW
+
+/* function LVM(fields, packageSize) {
     return {
         fields: fields,
         packageSize: packageSize,
@@ -47,26 +132,86 @@ function LVM(fields, packageSize) {
             this.pack();
         }
     };
-}
+} */
 
-function randomInt(max) {
-    return Math.floor(Math.random() * max);
-}
+/* (function () {
+    const array = [19, 12, 3, 4, 5, 2, 2, 3, 4, 5];
+    const packageSize = 20;
 
-function createRandomArray(size, maxSize) {
-    var array = [];
-    for (var i = 0; i < size; i++) {
-        array[i] = randomInt(maxSize);
+    var foundMatch = false;
+    var tolerance = 0;
+    var greatestMatch = 0;
+    var finalSum = 0;
+    var lastMatch = [];
+    do {
+        for (var i = 0; i < Math.pow(2, array.length); i++) {
+            var sum = 0;
+            lastMatch = [];
+            for (var element = 0; element < array.length; element++) {
+                var iAndElementPow = i & Math.pow(2, element);
+                if (iAndElementPow != 0) {
+                    lastMatch.push(element);
+
+                    sum += array[element];
+                    console.log("T. i:" + i + ", element:" + element + ", element^2:" + (Math.pow(2, element)) + ", i&element^2:" + iAndElementPow + ", i&element^2!=0:" + (iAndElementPow != 0));
+                } else {
+                    console.log("F. i:" + i + ", element:" + element + ", element^2:" + (Math.pow(2, element)) + ", i&element^2:" + iAndElementPow + ", i&element^2!=0:" + (iAndElementPow != 0));
+                }
+            }
+
+            if (sum > greatestMatch) {
+                greatestMatch = sum;
+            }
+
+            if (sum == packageSize + tolerance) {
+                finalSum = sum;
+                foundMatch = true;
+                break;
+            } else {
+                console.log("sum:" + sum)
+            }
+        }
+
+        if (greatestMatch < packageSize) {
+            console.log("Nothing to find greater than " + greatestMatch + ", aborting.");
+            finalSum = sum;
+            foundMatch = true;
+        }
+
+        tolerance++;
+    } while (!foundMatch);
+    var str = "sum:" + finalSum + ",match:" + (function () {
+            var str = "[";
+            for (var i = 0; i < lastMatch.length; i++) {
+                str += "{index:" + i + ", value:" + array[lastMatch[i]] + "}";
+            }
+            return str + "]";
+        })();
+    console.log(str);
+})(); */
+
+/* function recurseSum(numbers, index, sum, find) {
+    if (index == numbers.length) {
+        if (find == sum) {
+            console.log("Sum: " + sum);
+            return;
+        }
     }
-    return array;
+    recurseSum(numbers, index, sum, find);
 }
 
-function echoArray(array) {
-    var logString = "Fächer: [" + array.toString() + "].";
-    console.log(logString);
-}
+recurseSum([2, 2, 2, 3, 1, 2, 3, 4, 1], 0, 0, 3); */
+/* (function main() {
+    var array = createRandomArray(10, 10);
+    // var array = [4,8,5,4,4,7,6,7,9,6];
+    echoArray(array);
 
-$(document).ready(function () {
+    var lvm = new LVM(array, 20);
+    lvm.run();
+    // lvm.start();
+})(); */
+
+/* $(document).ready(function () {
     console.log("Document Ready.");
 
     var array = [];
@@ -100,13 +245,4 @@ $(document).ready(function () {
         }
     });
 });
-
-
-/* (function main() {
-    var array = createRandomArray(10, 10);
-    // var array = [4,8,5,4,4,7,6,7,9,6];
-    echoArray(array);
-
-    var lvm = new LVM(array, 20);
-    lvm.run();
-})(); */
+*/
