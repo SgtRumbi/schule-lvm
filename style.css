@@ -1,0 +1,58 @@
+body {
+  background-color: white;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 500px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3cm;
+  background-color: #37474F;
+  border-radius: 10px;
+}
+
+#heading {
+  text-align: center;
+}
+.input{
+  border-radius: 10px;
+  font-size: 20px;
+  border-style: none;
+  margin-left: 0.2cm;
+  position: absolute;
+  padding: 5px;
+}
+.input:focus {
+  outline: 0;
+}
+
+#max-ballons {
+  margin-top: 2cm;
+}
+
+#max-fields {
+  margin-top: 4cm;
+}
+
+.subutton {
+  position: absolute;
+  margin-top: 7cm;
+  margin-left: 0.2cm;
+  padding: 5px;
+  border-radius: 10px;
+  border-style: none;
+  background-color: white;
+}
+
+.subutton:focus {
+  outline: 0;
+  background-color: red;
+}
+
+/*
+.subutton :hover {
+  background-color: red;
+}
+*/
