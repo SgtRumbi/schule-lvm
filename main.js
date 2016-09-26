@@ -74,7 +74,17 @@ $(document).ready(function () {
     $(".fill-button").on("click", function () {
         // Fill
 
-        createRandomArray()
+        var maxBallons = inputFieldMaxBallons.val();
+        var maxFields = inputFieldMaxFields.val();
+        if (!maxBallons) {
+            alert("!maxBallons");
+            return;
+        }
+        if (!maxFields) {
+            alert("!maxFields");
+            return;
+        }
+        array = createRandomArray(maxBallons, maxFields);
     });
 
     $(".sub-button").on("click", function () {
