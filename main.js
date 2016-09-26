@@ -66,11 +66,29 @@ function echoArray(array) {
     console.log(logString);
 }
 
-(function main() {
+$(document).ready(function () {
+    var array = [];
+
+    $(".fill-button").on("click", function () {
+        // Fill
+    });
+
+    $(".sub-button").on("click", function () {
+        // Submit and Calculate
+        if (array.length < 1) {
+            alert("Zu kleines Array!");
+        } else {
+
+        }
+    });
+});
+
+
+/* (function main() {
     var array = createRandomArray(10, 10);
     // var array = [4,8,5,4,4,7,6,7,9,6];
     echoArray(array);
 
     var lvm = new LVM(array, 20);
     lvm.run();
-})();
+})(); */
