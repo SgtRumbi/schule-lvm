@@ -88,6 +88,7 @@ $(document).ready(function () {
             return;
         }
         array = createRandomArray(maxBallons, maxFields);
+        echoArray(array);
     });
 
     $(".sub-button").on("click", function () {
