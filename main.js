@@ -8,6 +8,7 @@ $(document).ready(function () {
     var wholeArrayContainer = $(".whole-array");
     var preOutputArray = $(".pre-output-array");
     var outputArray = $(".output-array");
+    var fieldElements = [];
 
     $(".fill-button").on("click", function () {
         console.log("Fill Button clicked.");
@@ -27,9 +28,12 @@ $(document).ready(function () {
         echoArray(array);
 
         wholeArrayContainer.empty();
+        fieldElements = [];
         // Fill .whole-array with numbers
         for (var i = 0; i < array.length; i++) {
-            var newFieldElement = $('<div class="field-element" id="JSID-' + i + '">' + array[i] + '</div>')
+            var newFieldElement = $('<div class="field-element" id="JSID-' + i + '">' + array[i] + '</div>');
+            newFieldElement.idNumber = i;
+            fieldElements.push(newFieldElement);
             wholeArrayContainer.append(newFieldElement);
         }
     });
@@ -42,18 +46,26 @@ $(document).ready(function () {
         }
 
         // Submit and Calculate
-        if (array.length < 1) {
-            alert("Zu kleines Array!");
-        } else {
-            var lvmResult = lvmSort(array, maxBallonsInPckg);
+        console.log("Calc starting...");
+        var lvmResult = lvmSort(array, maxBallonsInPckg, false);
+        console.log("Calc finished.");
+        var count = lvmResult.finalSum;
+        var arrayIndices = lvmResult.matchIndices;
+        for (var i = 0; i < array.length; i++) {
+            if (arrayIndices[i] == fieldElements[i].idNumber) {
+                var field = fieldElements[i];
+                field.toggleClass("field-element", "clearing-element");
+                console.log("Toggling class of " + i + " to clearing");
+            } else console.log("Not toggling.");
         }
+        outputArray.append($('<div class="field-element"></div>test<div>'));
     });
 });
 
 /* (function () {
- var array = createRandomArray(10, 10);
+ var array = [9,0,3,5,4,2,5,2,5,4,3,5,8,5,9,8,2,3,5,4];// createRandomArray(10, 13);
  echoArray(array);
- var lvmResult = lvmSort(array, 20, false);
+ var lvmResult = lvmSort(array, 20, true);
  console.log(lvmResult.finishMessage);
  })(); */
 

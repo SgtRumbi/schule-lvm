@@ -90,12 +90,19 @@ body {
 .field-element {
   float: left;
   padding: 5px;
-  background-color: #E34B30;
+  background-color: #e3b9bc;
   margin-right: 5px;
   border-radius: 10px;
   margin-top: 20px;
 }
 
-
+.clearing-element {
+  float: left;
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 10px;
+  margin-top: 25px;
+  background-color: #E34B30;
+}
 
 
